@@ -30,16 +30,21 @@ public class IdeaFrom extends JFrame {
     private void button1ActionPerformed(ActionEvent e) {
         // TODO add your code here
 //        意见发送
+        //标题
         String title =textField2.getText().trim();
+        //正文
         String text = textField1.getText().trim();
         if ("".equals(title)||"".equals(text)){
             JOptionPane.showMessageDialog(null, "提示：标题和正文都不能为空");
         }else {
+            //创建 IdeaServiceImpl对象
             IdeaServiceImpl ideaService = new IdeaServiceImpl();
             String time = new Date(System.currentTimeMillis()).toString();
+            //根据id获取用户名
             String loginName = new UserServiceImpl().queryById(UserData.userId).getLoginName();
-
+            //创建idea对象
             Ideas ideas = new Ideas(title, text, time, loginName);
+//            插入意见
             if(ideaService.insert(ideas)>0){
                 JOptionPane.showMessageDialog(null, "提示：发送成功");
             }else {

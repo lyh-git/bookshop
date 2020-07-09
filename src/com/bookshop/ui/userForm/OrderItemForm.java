@@ -27,7 +27,7 @@ public class OrderItemForm extends JFrame {
     List<Order> orderItems;
     public HashMap<Integer,String> orderStatu=new HashMap<>();
     public HashMap<String,Integer> orderStatu2=new HashMap<>();
-
+//把数据展示到表格
     public void click() {
 
         table1.setModel(new DefaultTableModel(
@@ -50,8 +50,9 @@ public class OrderItemForm extends JFrame {
 
 
     }
-
+//获取用户订单项数据
     private  String[][] select() {
+//        根据不同用户选择展示数据
         if("user".equals(UserData.Sign)) {
            orderItems = orderService.queryByUserId(UserData.userId);
         }else {
@@ -74,6 +75,7 @@ public class OrderItemForm extends JFrame {
         return datas;
     }
     public OrderItemForm() {
+//        初始化订单状态
         orderStatu.put(-1,"删除");
         orderStatu.put(1,"未付款");
         orderStatu.put(2,"已付款");
@@ -131,6 +133,8 @@ public class OrderItemForm extends JFrame {
 
     private void table1MouseClicked(MouseEvent e) {
         // TODO add your code here
+//        点击表格判定订单是否付款
+//        未付款跳转到付款界面
         if(e.getClickCount()==2){
             int row = ((JTable)e.getSource()).rowAtPoint(e.getPoint());
             int index=table1.getSelectedRow();

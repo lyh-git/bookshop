@@ -39,7 +39,7 @@ public class OrderForm extends JFrame {
     Order order = new Order();
     int userId = UserData.userId;
     CartServiceImpl cartService = new CartServiceImpl();
-
+//显示订单数据函数
     public void click() {
         orderTable.setModel(new DefaultTableModel(
                 UserData.arr,
@@ -57,7 +57,7 @@ public class OrderForm extends JFrame {
 
 
     }
-
+//把订单信息保存到用户缓存中
     private String[][] select() {
 
 //        List<Order> orders = orderService.queryAll();
@@ -84,6 +84,7 @@ public class OrderForm extends JFrame {
         Book book1=null;
         BookServiceImpl bookService=null;
         OrderItemServiceImpl orderItemService = new OrderItemServiceImpl();
+//        获取表格多行内容
         if (selectedRows.length > 0) {
             for (int index = 0; index < selectedRows.length; index++) {
                 // 取得表格对象的数据模型
@@ -98,6 +99,7 @@ public class OrderForm extends JFrame {
                 book1 = bookService.queryById(bookId);
                 remainder = book1.getStore() - booknum;
                 book1.setStore( book1.getStore()-booknum);
+//                订单状态判断
                 if(remainder<0||statu!=1){
                     JOptionPane.showMessageDialog(null, "提示：订单项创建失败,可能库存不足够或者商品下架");
                     return;
@@ -106,6 +108,7 @@ public class OrderForm extends JFrame {
             OrderServiceImpl orderService = new OrderServiceImpl();
             UserData.lastpricesum=priceSums;
             Order order = new Order(userId, priceSums, 1);
+//            插入订单
             last_id = orderService.insert(order);
 
 
