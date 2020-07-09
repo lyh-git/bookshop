@@ -8,11 +8,16 @@ import com.bookshop.service.BookListService;
 import java.util.List;
 
 public class BookListServiceImpl implements BookListService {
-
+    BookListImpl bookList = new BookListImpl();
 
     @Override
     public List<BookList> queryAll() {
-        BookListImpl bookList = new BookListImpl();
+
         return bookList.queryAll();
+    }
+
+    @Override
+    public List<BookList> queryByName(String name) {
+        return bookList.queryByName(name);
     }
 }

@@ -28,13 +28,49 @@ public class BookListImpl implements BookListDao {
 
             while (resultSet.next()) {
                 BookList bookList = new BookList();
-                bookList.setId(resultSet.getInt(1));
-                bookList.setName(resultSet.getString(2));
-                bookList.setLink(resultSet.getString(3));
-                bookList.setPublicer(resultSet.getString(4));
-                bookList.setGrade(resultSet.getString(5));
-                bookList.setNum(resultSet.getString(6));
-                bookList.setContent(resultSet.getString(7));
+                bookList.setName(resultSet.getString(1));
+                bookList.setLink(resultSet.getString(2));
+                bookList.setPublicer(resultSet.getString(3));
+                bookList.setGrade(resultSet.getString(4));
+                bookList.setNum(resultSet.getString(5));
+                bookList.setContent(resultSet.getString(6));
+                list.add(bookList);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                resultSet.close();
+                preparedStatement.close();
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return list;
+    }
+
+    @Override
+    public List<BookList> queryByName(String name) {
+        String sql = "SELECT * FROM `Booklist` WHERE `name` LIKE ? ";
+        List<BookList> list = new ArrayList<>();
+        Connection connection = JDBCUtils.getConnection();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, "%"+name+"%");
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                BookList bookList = new BookList();
+                bookList.setName(resultSet.getString(1));
+                bookList.setLink(resultSet.getString(2));
+                bookList.setPublicer(resultSet.getString(3));
+                bookList.setGrade(resultSet.getString(4));
+                bookList.setNum(resultSet.getString(5));
+                bookList.setContent(resultSet.getString(6));
                 list.add(bookList);
             }
         } catch (SQLException e) {

@@ -8,4 +8,5 @@ import java.util.List;
 public interface BookListDao {
     // queryAll
     List<BookList> queryAll();
+    List<BookList>queryByName(String name);
 }

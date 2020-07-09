@@ -5,6 +5,7 @@
 package com.bookshop.ui.AdminForm;
 
 import com.bookshop.ui.publicForm.LoginFrame;
+import com.bookshop.ui.userForm.BookListForm;
 import com.bookshop.ui.userForm.OrderItemForm;
 import com.bookshop.ui.userForm.OrderItemsForm;
 import com.bookshop.ui.userForm.UserUpdateForm;
@@ -87,12 +88,20 @@ public class AdminMainForm extends JFrame {
 
     }
 
+    private void menuItem2ActionPerformed(ActionEvent e) {
+        // TODO add your code here
+//        同行商品
+        BookListForm bookListForm = new BookListForm();
+        bookListForm.setVisible(true);
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         menuBar1 = new JMenuBar();
         CommodityManagementMenu = new JMenu();
         commodityManagementMenuItem = new JMenuItem();
         menuItem1 = new JMenuItem();
+        menuItem2 = new JMenuItem();
         orderManagementMenu = new JMenu();
         orderManagementMenuItem = new JMenuItem();
         orderManagementMenuItem2 = new JMenuItem();
@@ -126,6 +135,11 @@ public class AdminMainForm extends JFrame {
                 menuItem1.setText("\u5546\u54c1\u7c7b\u522b\u7ba1\u7406");
                 menuItem1.addActionListener(e -> menuItem1ActionPerformed(e));
                 CommodityManagementMenu.add(menuItem1);
+
+                //---- menuItem2 ----
+                menuItem2.setText("\u540c\u884c\u5546\u54c1");
+                menuItem2.addActionListener(e -> menuItem2ActionPerformed(e));
+                CommodityManagementMenu.add(menuItem2);
             }
             menuBar1.add(CommodityManagementMenu);
 
@@ -215,6 +229,7 @@ public class AdminMainForm extends JFrame {
     private JMenu CommodityManagementMenu;
     private JMenuItem commodityManagementMenuItem;
     private JMenuItem menuItem1;
+    private JMenuItem menuItem2;
     private JMenu orderManagementMenu;
     private JMenuItem orderManagementMenuItem;
     private JMenuItem orderManagementMenuItem2;

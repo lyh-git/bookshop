@@ -210,6 +210,12 @@ public class UserMainFrame extends JFrame {
         testIdea.setVisible(true);
     }
 
+    private void menu4MouseClicked(MouseEvent e) {
+        // TODO add your code here
+        BookListForm bookListForm = new BookListForm();
+        bookListForm.setVisible(true);
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         menuBar1 = new JMenuBar();
@@ -218,6 +224,7 @@ public class UserMainFrame extends JFrame {
         ideaMenu3 = new JMenu();
         menu1 = new JMenu();
         menu3 = new JMenu();
+        menu4 = new JMenu();
         menu2 = new JMenu();
         scrollPane1 = new JScrollPane();
         table1 = new JTable();
@@ -295,6 +302,18 @@ public class UserMainFrame extends JFrame {
                 });
             }
             menuBar1.add(menu3);
+
+            //======== menu4 ========
+            {
+                menu4.setText("\u540c\u884c\u4ef7\u683c");
+                menu4.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        menu4MouseClicked(e);
+                    }
+                });
+            }
+            menuBar1.add(menu4);
 
             //======== menu2 ========
             {
@@ -398,6 +417,7 @@ public class UserMainFrame extends JFrame {
     private JMenu ideaMenu3;
     private JMenu menu1;
     private JMenu menu3;
+    private JMenu menu4;
     private JMenu menu2;
     private JScrollPane scrollPane1;
     private JTable table1;
