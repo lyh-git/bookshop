@@ -80,11 +80,19 @@ public class AdminMainForm extends JFrame {
         updateAdminForm.setVisible(true);
     }
 
+    private void menuItem1ActionPerformed(ActionEvent e) {
+        // TODO add your code here
+        BookTypeForm bookTypeForm = new BookTypeForm();
+        bookTypeForm.setVisible(true);
+
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         menuBar1 = new JMenuBar();
         CommodityManagementMenu = new JMenu();
         commodityManagementMenuItem = new JMenuItem();
+        menuItem1 = new JMenuItem();
         orderManagementMenu = new JMenu();
         orderManagementMenuItem = new JMenuItem();
         orderManagementMenuItem2 = new JMenuItem();
@@ -113,6 +121,11 @@ public class AdminMainForm extends JFrame {
                 commodityManagementMenuItem.setText("\u5546\u54c1\u5c5e\u6027\u7ba1\u7406");
                 commodityManagementMenuItem.addActionListener(e -> commodityManagementMenuItemActionPerformed(e));
                 CommodityManagementMenu.add(commodityManagementMenuItem);
+
+                //---- menuItem1 ----
+                menuItem1.setText("\u5546\u54c1\u7c7b\u522b\u7ba1\u7406");
+                menuItem1.addActionListener(e -> menuItem1ActionPerformed(e));
+                CommodityManagementMenu.add(menuItem1);
             }
             menuBar1.add(CommodityManagementMenu);
 
@@ -201,6 +214,7 @@ public class AdminMainForm extends JFrame {
     private JMenuBar menuBar1;
     private JMenu CommodityManagementMenu;
     private JMenuItem commodityManagementMenuItem;
+    private JMenuItem menuItem1;
     private JMenu orderManagementMenu;
     private JMenuItem orderManagementMenuItem;
     private JMenuItem orderManagementMenuItem2;

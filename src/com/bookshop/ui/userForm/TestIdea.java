@@ -17,6 +17,10 @@ import javax.swing.*;
  * @author °Ëµã°ë
  */
 public final class TestIdea extends JFrame {
+    public static JTextField textField1;
+    private JButton button1;
+    private JScrollPane scrollPane1;
+    public static JTextArea textArea1;
     public static void main(String[] args) {
         TestIdea testIdea = new TestIdea();
         testIdea.setVisible(true);
@@ -96,9 +100,9 @@ public final class TestIdea extends JFrame {
 
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    public static JTextField textField1;
-    private JButton button1;
-    private JScrollPane scrollPane1;
-    public static JTextArea textArea1;
+//    private JTextField textField1;
+//    private JButton button1;
+//    private JScrollPane scrollPane1;
+//    private JTextArea textArea1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

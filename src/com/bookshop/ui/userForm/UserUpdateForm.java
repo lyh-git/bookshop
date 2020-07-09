@@ -30,8 +30,8 @@ public class UserUpdateForm extends JFrame {
     private void button1ActionPerformed(ActionEvent e) {
         // TODO add your code here
 //       修改用户
-        int lev=0, id;
-        String loginName, password, name="未设置", sex="未设置", email="未设置", tel="未设置", address="未设置";
+        int lev = 0, id;
+        String loginName, password, name = "未设置", sex = "未设置", email = "未设置", tel = "未设置", address = "未设置";
         int index = table1.getSelectedRow();
         TableModel model = table1.getModel();
         // 如果下标不为-1，则选中行为数据行
@@ -72,8 +72,8 @@ public class UserUpdateForm extends JFrame {
     private void button2ActionPerformed(ActionEvent e) {
         // TODO add your code here
 //        注销用户,体现在lev的修改
-        int lev=0, id;
-        String loginName, password, name="未设置", sex="未设置", email="未设置", tel="未设置", address="未设置";
+        int lev = 0, id;
+        String loginName, password, name = "未设置", sex = "未设置", email = "未设置", tel = "未设置", address = "未设置";
         int index = table1.getSelectedRow();
         TableModel model = table1.getModel();
         // 如果下标不为-1，则选中行为数据行
@@ -98,7 +98,8 @@ public class UserUpdateForm extends JFrame {
             User user = new User(id, loginName, password, name, sex, email, tel, address, lev);
             if (userService.update(user) > 0) {
                 JOptionPane.showMessageDialog(null, "提示：" + user.getLoginName() + "注销成功！");
-                click();
+//                click();
+                System.exit(0);
             } else {
                 JOptionPane.showMessageDialog(null, "提示：注销失败！");
             }
@@ -123,14 +124,23 @@ public class UserUpdateForm extends JFrame {
 
             //---- table1 ----
             table1.setModel(new DefaultTableModel(
-                new Object[][] {
-                    {null, null, null, null, null, null, null, null},
-                    {null, null, null, null, null, null, null, null},
-                },
-                new String[] {
-                    "ID", "\u767b\u5f55\u540d", "\u5bc6\u7801", "\u6635\u79f0", "\u6027\u522b", "\u90ae\u7bb1", "\u7535\u8bdd", "\u5730\u5740"
+                    new Object[][]{
+                            {null, null, null, null, null, null, null, null},
+                            {null, null, null, null, null, null, null, null},
+                    },
+                    new String[]{
+                            "ID", "\u767b\u5f55\u540d", "\u5bc6\u7801", "\u6635\u79f0", "\u6027\u522b", "\u90ae\u7bb1", "\u7535\u8bdd", "\u5730\u5740"
+                    }
+            ) {
+                boolean[] columnEditable = new boolean[]{
+                        false, false, true, true, true, true, true, true
+                };
+
+                @Override
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return columnEditable[columnIndex];
                 }
-            ));
+            });
             scrollPane1.setViewportView(table1);
         }
         contentPane.add(scrollPane1);
@@ -162,15 +172,36 @@ public class UserUpdateForm extends JFrame {
                     new String[]{
                             "ID", "登录名", "密码", "昵称", "性别", "邮箱", "电话", "地址"
                     }
-            ));
+            )
+                            {
+                                boolean[] columnEditable = new boolean[]{
+                                        false, false, true, true, true, true, true, true
+                                };
+
+                                @Override
+                                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                                    return columnEditable[columnIndex];
+                                }
+                            }
+            );
             scrollPane1.setViewportView(table1);
         } else {
             table1.setModel(new DefaultTableModel(
-                    select(),
-                    new String[]{
-                            "ID", "\u767b\u5f55\u540d", "\u5bc6\u7801", "\u6635\u79f0", "\u6027\u522b", "\u90ae\u7bb1", "\u7535\u8bdd", "\u5730\u5740", "等级"
-                    }
-            ));
+                                    select(),
+                                    new String[]{
+                                            "ID", "\u767b\u5f55\u540d", "\u5bc6\u7801", "\u6635\u79f0", "\u6027\u522b", "\u90ae\u7bb1", "\u7535\u8bdd", "\u5730\u5740", "等级"
+                                    }
+                            ) {
+                                boolean[] columnEditable = new boolean[]{
+                                        false, false, true, true, true, true, true, true
+                                };
+
+                                @Override
+                                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                                    return columnEditable[columnIndex];
+                                }
+                            }
+            );
             scrollPane1.setViewportView(table1);
             button2.setVisible(false);
         }
@@ -183,8 +214,8 @@ public class UserUpdateForm extends JFrame {
         if ("user".equals(UserData.Sign)) {
             User user = userService.queryById(UserData.userId);
             datas = new String[1][8];
-            if(user.getLevel()==-1){
-                return  new String[][] {
+            if (user.getLevel() == -1) {
+                return new String[][]{
                         {null, null, null, null, null, null, null, null},
                         {null, null, null, null, null, null, null, null},
                 };

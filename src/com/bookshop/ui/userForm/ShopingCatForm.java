@@ -198,7 +198,7 @@ public class ShopingCatForm extends JFrame {
                     {null, null, null, null, null, null},
                 },
                 new String[] {
-                    "ID", "bookID", "\u56fe\u4e66\u540d\u79f0", "\u56fe\u4e66\u4ef7\u683c", "\u56fe\u4e66\u6570\u91cf", "\u56fe\u4e66\u603b\u4ef7\u683c","状态"
+                    "ID", "bookID", "\u56fe\u4e66\u540d\u79f0", "\u56fe\u4e66\u4ef7\u683c", "\u56fe\u4e66\u6570\u91cf", "\u56fe\u4e66\u603b\u4ef7\u683c"
                 }
             ) {
                 boolean[] columnEditable = new boolean[] {
@@ -227,7 +227,7 @@ public class ShopingCatForm extends JFrame {
         settleAccountsbutton2.setBounds(new Rectangle(new Point(585, 345), settleAccountsbutton2.getPreferredSize()));
 
         //---- spinner1 ----
-        spinner1.setModel(new SpinnerNumberModel(0, 0, 50, 2));
+        spinner1.setModel(new SpinnerNumberModel(1, 1, 50, 1));
         contentPane.add(spinner1);
         spinner1.setBounds(30, 345, 128, spinner1.getPreferredSize().height);
 

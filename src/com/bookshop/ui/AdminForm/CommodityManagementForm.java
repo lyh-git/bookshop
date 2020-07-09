@@ -101,10 +101,22 @@ public class CommodityManagementForm extends JFrame {
                 author = (model.getValueAt(index, 2)).toString();
                 pulisher = (model.getValueAt(index, 3)).toString() + " ";
                 price = Double.parseDouble(model.getValueAt(index, 4).toString());
+                if (price<=0){
+                    JOptionPane.showMessageDialog(null, "提示：价格不能小于0,自动设置为100000");
+                    price =100000;
+                }
                 typeId = (model.getValueAt(index, 5).toString());
                 disc=(model.getValueAt(index, 6).toString());
                 discount = Double.parseDouble(model.getValueAt(index, 7).toString());
+                if (discount>1||discount<0){
+                    JOptionPane.showMessageDialog(null, "提示：折扣设置出错,自动设置为1");
+                    discount =1;
+                }
                 store = Integer.parseInt(model.getValueAt(index, 8).toString());
+                if (store<=0){
+                    JOptionPane.showMessageDialog(null, "提示：库存不能小于0,自动设置为1");
+                    store =1;
+                }
                 flage = Integer.parseInt(model.getValueAt(index, 9).toString());
                 time=(model.getValueAt(index, 10).toString());
             } catch (Exception es) {

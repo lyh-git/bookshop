@@ -15,6 +15,7 @@ import com.bookshop.util.UserData;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.HashMap;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.table.*;
@@ -25,6 +26,8 @@ import javax.swing.table.*;
 public class UserMainFrame extends JFrame {
     public BookService bookService = new BookServiceImpl();
     public CartService cartService = new CartServiceImpl();
+    public HashMap<Integer, String> bookstatu = new HashMap<>();
+    public HashMap<String, Integer> bookstatu2 = new HashMap<>();
 
 
     public static void main(String[] args) {
@@ -34,9 +37,15 @@ public class UserMainFrame extends JFrame {
 
     private static IdeaFrom ideaFrom = null;
     private static OrderItemForm orderForm = null;
-    private static ShopingCatForm shopingCatForm=null;
+    private static ShopingCatForm shopingCatForm = null;
 
     public UserMainFrame() {
+        bookstatu.put(-1, "删除");
+        bookstatu.put(0, "下架");
+        bookstatu.put(1, "上架");
+        bookstatu2.put("删除", -1);
+        bookstatu2.put("下架", 0);
+        bookstatu2.put("上架", 1);
         initComponents();
     }
 
@@ -83,21 +92,20 @@ public class UserMainFrame extends JFrame {
     }
 
 
-
-    private String[][] select(){
+    private String[][] select() {
         List<Book> books;
         Object selectedItem = comboBox1.getSelectedItem();
         String text = textField1.getText();
-        if(selectedItem.equals("图书")){
+        if (selectedItem.equals("图书")) {
             books = bookService.queryByName(text);
 
-        }else {
+        } else {
             books = bookService.queryAll();
         }
         String[][] datas = new String[books.size()][10];
         for (int i = 0; i < datas.length; i++) {
-            if(books.get(i).getFlag()==0){
-               continue;
+            if (books.get(i).getFlag() != 1) {
+                continue;
             }
             datas[i][0] = books.get(i).getName();
             datas[i][1] = books.get(i).getAuthor();
@@ -107,8 +115,9 @@ public class UserMainFrame extends JFrame {
             datas[i][5] = books.get(i).getDisc();
             datas[i][6] = books.get(i).getDiscount().toString();
             datas[i][7] = books.get(i).getStore().toString();
-            datas[i][8] = books.get(i).getFlag().toString();
+            datas[i][8] = bookstatu.get(books.get(i).getFlag());
             datas[i][9] = books.get(i).getId().toString();
+
 
         }
         return datas;
@@ -127,20 +136,20 @@ public class UserMainFrame extends JFrame {
             // 取得表格对象的数据模型
             TableModel model = table1.getModel();
             // 在表格对象模型中，根据选中的行和列，获取相应的数据值
-            Integer statu = Integer.parseInt(model.getValueAt(index, 8).toString());
+            Integer statu = bookstatu2.get(model.getValueAt(index, 8).toString());
             Integer primaryKey = Integer.parseInt(model.getValueAt(index, 9).toString());
             book = bookService.queryById(primaryKey);
             Cart cart = new Cart(UserData.userId, book.getId(), 1, book.getPrice(), book.getName());
-            if (statu==1) {
-                if(cartService.insert(cart) > 0) {
+            if (statu == 1) {
+                if (cartService.insert(cart) > 0) {
                     JOptionPane.showMessageDialog(null, "提示：" + book.getName() + "加入购物车成功！");
                 } else {
-                JOptionPane.showMessageDialog(null, "提示：加入购物车失败！");
-             }
-                }else {
+                    JOptionPane.showMessageDialog(null, "提示：加入购物车失败！");
+                }
+            } else {
                 JOptionPane.showMessageDialog(null, "提示：商品已下架！");
             }
-        }else {
+        } else {
             JOptionPane.showMessageDialog(null, "提示：请选择需要加入购物车的书籍！");
         }
     }
@@ -148,19 +157,29 @@ public class UserMainFrame extends JFrame {
     private void button1ActionPerformed(ActionEvent e) {
         showData();
     }
-    public void showData(){
+
+    public void showData() {
 
         //======== scrollPane1 ========
         {
 
             //---- table1 ----
             table1.setModel(new DefaultTableModel(
-                    select(),
-                    new String[] {
-                            "\u4e66\u540d", "\u4f5c\u8005", "\u51fa\u7248\u793e", "\u4ef7\u683c", "\u7c7b\u578b", "\u662f\u5426\u6709\u5149\u789f", "\u6298\u6263", "\u5e93\u5b58", "\u72b6\u6001", "ID"
-                    }
-            ));
+                                    select(),
+                                    new String[]{
+                                            "\u4e66\u540d", "\u4f5c\u8005", "\u51fa\u7248\u793e", "\u4ef7\u683c", "\u7c7b\u578b", "\u662f\u5426\u6709\u5149\u789f", "\u6298\u6263", "\u5e93\u5b58", "\u72b6\u6001", "ID"
+                                    }
+                            ) {
+
+                                @Override
+                                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                                    return false;
+                                }
+
+                            }
+            );
             scrollPane1.setViewportView(table1);
+
         }
     }
 

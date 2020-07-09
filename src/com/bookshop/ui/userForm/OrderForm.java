@@ -60,7 +60,7 @@ public class OrderForm extends JFrame {
 
     private String[][] select() {
 
-        List<Order> orders = orderService.queryAll();
+//        List<Order> orders = orderService.queryAll();
 
         String[][] datas = UserData.arr;
         //---- table1 ---

@@ -107,7 +107,7 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JSpinner" ) {
 				name: "spinner1"
-				"model": new javax.swing.SpinnerNumberModel( 0, 0, 50, 2 )
+				"model": new javax.swing.SpinnerNumberModel( 1, 1, 50, 1 )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 30
 				"y": 345

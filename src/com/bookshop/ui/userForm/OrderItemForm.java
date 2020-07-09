@@ -14,6 +14,7 @@ import com.bookshop.service.impl.OrderServiceImpl;
 import com.bookshop.util.UserData;
 
 import java.awt.*;
+import java.util.HashMap;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.table.*;
@@ -24,6 +25,9 @@ import javax.swing.table.*;
 public class OrderItemForm extends JFrame {
     private OrderServiceImpl orderService = new OrderServiceImpl();
     List<Order> orderItems;
+    public HashMap<Integer,String> orderStatu=new HashMap<>();
+    public HashMap<String,Integer> orderStatu2=new HashMap<>();
+
     public void click() {
 
         table1.setModel(new DefaultTableModel(
@@ -62,7 +66,7 @@ public class OrderItemForm extends JFrame {
             datas[i][0] = orderItems.get(i).getId().toString();
             datas[i][1] = orderItems.get(i).getPriceSum().toString();
             datas[i][2] = orderItems.get(i).getUserId().toString();
-            datas[i][3] = orderItems.get(i).getStatus().toString();
+            datas[i][3] = orderStatu.get(orderItems.get(i).getStatus());
 
 
         }
@@ -70,7 +74,12 @@ public class OrderItemForm extends JFrame {
         return datas;
     }
     public OrderItemForm() {
-
+        orderStatu.put(-1,"删除");
+        orderStatu.put(1,"未付款");
+        orderStatu.put(2,"已付款");
+        orderStatu2.put("删除",-1);
+        orderStatu2.put("未付款",1);
+        orderStatu2.put("已付款",2);
         initComponents();
         click();
     }
@@ -130,7 +139,7 @@ public class OrderItemForm extends JFrame {
                 // 如果下标不为-1，则选中行为数据行
                 if (index != -1) {
                     int id = Integer.parseInt(model.getValueAt(index, 0).toString());
-                    int statu = Integer.parseInt(model.getValueAt(index, 3).toString());
+                    int statu = orderStatu2.get((model.getValueAt(index, 3).toString()));
                     UserData.lastId=id;
                     if(statu==2){
                         JOptionPane.showMessageDialog(null, "提示：订单已付款");
