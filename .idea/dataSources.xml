@@ -19,5 +19,11 @@
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:I:\BookShop\BookShop\charrobot\db.sqlite3</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="db [2]" uuid="378ba00c-0c38-461d-8706-746fffe45c71">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:I:\BookShop\BookShop\charrobot\DEMO01\CS1\db.sqlite3</jdbc-url>
+    </data-source>
   </component>
 </project>

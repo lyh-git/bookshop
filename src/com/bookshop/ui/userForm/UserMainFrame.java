@@ -5,10 +5,12 @@
 package com.bookshop.ui.userForm;
 
 import com.bookshop.entity.Book;
+import com.bookshop.entity.BookType;
 import com.bookshop.entity.Cart;
 import com.bookshop.service.BookService;
 import com.bookshop.service.CartService;
 import com.bookshop.service.impl.BookServiceImpl;
+import com.bookshop.service.impl.BookTypeServiceImpl;
 import com.bookshop.service.impl.CartServiceImpl;
 import com.bookshop.ui.publicForm.LoginFrame;
 import com.bookshop.util.UserData;
@@ -28,6 +30,8 @@ public class UserMainFrame extends JFrame {
     public CartService cartService = new CartServiceImpl();
     public HashMap<Integer, String> bookstatu = new HashMap<>();
     public HashMap<String, Integer> bookstatu2 = new HashMap<>();
+    public HashMap<Integer, String> bookType = new HashMap<>();
+    public HashMap<String, Integer> bookType2 = new HashMap<>();
 
 
     public static void main(String[] args) {
@@ -46,6 +50,12 @@ public class UserMainFrame extends JFrame {
         bookstatu2.put("删除", -1);
         bookstatu2.put("下架", 0);
         bookstatu2.put("上架", 1);
+        BookTypeServiceImpl bookTypeService = new BookTypeServiceImpl();
+        List<BookType> bookTypes = bookTypeService.queryAll();
+        for (int i = 0; i < bookTypes.size(); i++) {
+            bookType.put(bookTypes.get(i).getId(),bookTypes.get(i).getType());
+            bookType2.put(bookTypes.get(i).getType(),bookTypes.get(i).getId());
+        }
         initComponents();
     }
 
@@ -111,7 +121,7 @@ public class UserMainFrame extends JFrame {
             datas[i][1] = books.get(i).getAuthor();
             datas[i][2] = books.get(i).getPublisher();
             datas[i][3] = books.get(i).getPrice().toString();
-            datas[i][4] = books.get(i).getType();
+            datas[i][4] = bookType.get(Integer.parseInt(books.get(i).getType()));
             datas[i][5] = books.get(i).getDisc();
             datas[i][6] = books.get(i).getDiscount().toString();
             datas[i][7] = books.get(i).getStore().toString();

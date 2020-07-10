@@ -26,6 +26,9 @@ public class BookListForm extends JFrame {
     BookListServiceImpl bookListService=new BookListServiceImpl();
     public BookListForm() {
         initComponents();
+        if("user".equals(UserData.Sign)){
+            button3.setVisible(false);
+        }
     }
 
     private void button1ActionPerformed(ActionEvent e) {
@@ -117,9 +120,7 @@ public class BookListForm extends JFrame {
         button3.addActionListener(e -> button3ActionPerformed(e));
         contentPane.add(button3);
         button3.setBounds(new Rectangle(new Point(180, 400), button3.getPreferredSize()));
-        if ("user".equals(UserData.Sign)) {
-            button3.setVisible(false);
-        }
+
         contentPane.setPreferredSize(new Dimension(720, 470));
         pack();
         setLocationRelativeTo(getOwner());
